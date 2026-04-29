@@ -16,10 +16,22 @@ const serviceItems = [
   ["szolgaltatas-webfejlesztes.html", "Webfejlesztés"],
   ["szolgaltatas-social-media.html", "Social media kezelés"],
   ["szolgaltatas-branding.html", "Arculat és kreatív"],
-  ["szolgaltatas-tanacsadas.html", "Marketing audit"],
+  ["szolgaltatas-tanacsadas.html", "Marketing audit"]
 ];
 
-const logoMarkup = '<img class="brand__logo" src="assets/elite-image-logo.svg?v=20260429b" alt="Elite Image Marketing">';
+const teamItems = [
+  ["assets/team-01.svg?v=20260429c", "Taussig Dávid", "CEO / PPC reklámstratégia vezető"],
+  ["assets/team-02.svg?v=20260429c", "Seres Sándor", "CEO / tartalomstratégia vezető"],
+  ["assets/team-03.svg?v=20260429c", "Leposa Benedek", "Forgatásvezető / script író"],
+  ["assets/team-04.svg?v=20260429c", "Hevesi Emília", "Szövegíró / social media manager"],
+  ["assets/team-05.svg?v=20260429c", "Farkas Roland", "Videóvágó / operatőr"],
+  ["assets/team-06.svg?v=20260429c", "Kiss Bence", "Operatőr / fotós"],
+  ["assets/team-07.svg?v=20260429c", "Bíró Adrienn", "Grafikus / social media manager"],
+  ["assets/team-08.svg?v=20260429c", "Balogh Levente", "Videóvágó / operatőr"],
+  ["assets/team-09.svg?v=20260429c", "Tóbi Tamás", "Csapattag / kreatív támogatás"]
+];
+
+const logoMarkup = '<img class="brand__logo" src="assets/elite-image-logo.svg?v=20260429c" alt="Elite Image Marketing">';
 const currentPage = window.location.pathname.split("/").pop() || "index.html";
 
 const globalStyles = document.createElement("style");
@@ -37,12 +49,12 @@ globalStyles.textContent = `
   .nav__drop a { min-height: 42px; justify-content: flex-start; border: 0; border-radius: 6px; text-transform: none; letter-spacing: 0; font-size: .88rem; }
   .nav__drop a:hover { background: rgba(240,207,130,.1); }
   .nav__item:hover .nav__drop, .nav__item:focus-within .nav__drop { opacity: 1; visibility: visible; transform: translateY(0); }
-  h1, h2 { text-wrap: balance; }
-  .hero__content h1, .page-hero h1, .section__head h2 { text-shadow: 0 22px 54px rgba(0,0,0,.56); }
-  .hero__content h1 { max-width: 980px; padding: .1em 0 .12em; background: linear-gradient(90deg, rgba(240,207,130,.18), transparent 70%); border-left: 3px solid rgba(240,207,130,.7); padding-left: clamp(16px, 3vw, 34px); }
+  .hero__content h1, .page-hero h1, .section__head h2 { text-shadow: 0 22px 54px rgba(0,0,0,.56); text-wrap: balance; }
+  .hero__content h1 { max-width: 980px; padding: .1em 0 .12em clamp(16px, 3vw, 34px); background: linear-gradient(90deg, rgba(240,207,130,.18), transparent 70%); border-left: 3px solid rgba(240,207,130,.7); }
   .section__head h2, .page-hero h1 { color: #fff8e8; }
   .section__head > div::after { content: ""; display: block; width: min(180px, 46vw); height: 2px; margin-top: 18px; background: linear-gradient(90deg, var(--gold), transparent); }
-  .service-card, .value-card, .project-card, .contact-panel, .faq-list details, .reason-list article, .problem-list article { background: linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.018)); }
+  .team-grid { align-items: stretch; }
+  .team-card img { object-position: center 16%; background: #fff; }
   .site-footer { padding: clamp(54px, 7vw, 78px) 0 30px; border-top: 1px solid rgba(214,173,87,.2); background: radial-gradient(circle at 18% 0, rgba(214,173,87,.12), transparent 28rem), #050505; }
   .footer__inner { width: min(var(--max), calc(100% - 32px)); display: grid; grid-template-columns: minmax(230px, 1.15fr) repeat(3, minmax(170px, .8fr)); gap: clamp(24px, 4vw, 48px); align-items: start; }
   .footer__column { display: grid; gap: 10px; }
@@ -52,32 +64,11 @@ globalStyles.textContent = `
   .footer__column a, .footer__meta a { color: #efe5d0; }
   .footer__column a:hover, .footer__meta a:hover { color: var(--gold-bright); }
   .footer__meta { width: min(var(--max), calc(100% - 32px)); margin: 34px auto 0; padding-top: 20px; border-top: 1px solid rgba(214,173,87,.16); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; color: #9f947e; font-size: .82rem; }
-  .team-card img { object-position: center 16%; background: #fff; }
   .reveal { filter: blur(3px); transform: translateY(18px); }
-  .reveal--slide { transform: translateY(18px); }
-  .service-rail .reveal:nth-child(even), .team-grid .reveal:nth-child(even), .service-rail .reveal:nth-child(odd), .team-grid .reveal:nth-child(odd) { transform: translateY(20px); }
   .section, .cta { transition: opacity 140ms linear, transform 140ms linear; }
   @media (max-width: 1100px) { .nav { gap: 14px; } .nav__links a, .nav__drop-trigger { padding-inline: 9px; font-size: .76rem; } .team-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
-  @media (max-width: 920px) {
-    .brand__logo { width: 176px; }
-    .nav { min-height: 82px; }
-    .nav__links { overflow-y: auto; max-height: calc(100vh - 82px); }
-    .nav__item { display: grid; }
-    .nav__drop-trigger { justify-content: center; min-height: 54px; }
-    .nav__drop { position: static; min-width: 0; opacity: 1; visibility: visible; transform: none; box-shadow: none; border: 0; border-radius: 0; padding: 0 0 10px; background: transparent; }
-    .nav__drop a { justify-content: center; min-height: 44px; }
-    .footer__inner { grid-template-columns: 1fr 1fr; }
-    .hero__content h1 { padding-left: 18px; }
-  }
-  @media (max-width: 620px) {
-    .brand__logo { width: 162px; }
-    .footer__inner { grid-template-columns: 1fr; }
-    .footer__meta { flex-direction: column; }
-    .button { width: 100%; }
-    .team-grid { grid-template-columns: 1fr; }
-    .problem-list--compact article { grid-template-columns: 46px minmax(0,1fr); padding: 16px; }
-    .problem-list--compact article span { font-size: 2.1rem; }
-  }
+  @media (max-width: 920px) { .brand__logo { width: 176px; } .nav { min-height: 82px; } .nav__links { overflow-y: auto; max-height: calc(100vh - 82px); } .nav__item { display: grid; } .nav__drop-trigger { justify-content: center; min-height: 54px; } .nav__drop { position: static; min-width: 0; opacity: 1; visibility: visible; transform: none; box-shadow: none; border: 0; border-radius: 0; padding: 0 0 10px; background: transparent; } .nav__drop a { justify-content: center; min-height: 44px; } .footer__inner { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 620px) { .brand__logo { width: 162px; } .footer__inner { grid-template-columns: 1fr; } .footer__meta { flex-direction: column; } .button { width: 100%; } .team-grid { grid-template-columns: 1fr; } }
 `;
 document.head.appendChild(globalStyles);
 
@@ -97,14 +88,16 @@ if (nav) {
   }).join("");
 }
 
+const teamGrid = document.querySelector(".team-grid");
+if (teamGrid) {
+  teamGrid.innerHTML = teamItems.map(([src, name, role]) => `<article class="team-card"><img src="${src}" alt="${name}"><div><span>${role}</span><h3>${name}</h3></div></article>`).join("");
+}
+
 const footer = document.querySelector(".site-footer");
 if (footer) {
   footer.innerHTML = `
     <div class="footer__inner">
-      <div class="footer__column">
-        <a class="brand" href="index.html" aria-label="Elite Image Marketing főoldal">${logoMarkup}</a>
-        <p>Online marketing, PPC, tartalomgyártás és webfejlesztés egy kézben, átlátható stratégiával és üzleti fókuszú kivitelezéssel.</p>
-      </div>
+      <div class="footer__column"><a class="brand" href="index.html" aria-label="Elite Image Marketing főoldal">${logoMarkup}</a><p>Online marketing, PPC, tartalomgyártás és webfejlesztés egy kézben, átlátható stratégiával és üzleti fókuszú kivitelezéssel.</p></div>
       <div class="footer__column"><h3>Navigáció</h3><div class="footer__links"><a href="index.html">Főoldal</a><a href="szolgaltatasok.html">Szolgáltatások</a><a href="blog.html">Blog</a><a href="karrier.html">Karrier</a><a href="kapcsolat.html">Kapcsolat</a></div></div>
       <div class="footer__column"><h3>Kapcsolat</h3><p>Elite Image Kft.</p><p>4028 Debrecen, Kassai út 129.</p><a href="mailto:Info@eliteimage.hu">Info@eliteimage.hu</a><a href="tel:+36706789424">+36 70 678 9424</a><a href="tel:+36204968198">+36 20 496 8198</a></div>
       <div class="footer__column"><h3>Jogi információk</h3><a href="aszf.html">Általános szerződési feltételek</a><a href="adatkezeles.html">Adatkezelési tájékoztató</a><p>Ügyvezetők: Taussig Dávid és Seres Sándor</p></div>
@@ -138,13 +131,8 @@ if ("IntersectionObserver" in window) {
       }
     });
   }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-
   revealTargets.forEach((item, index) => {
     item.classList.add("reveal");
-    if (item.matches(".section__head")) item.classList.add("reveal--title");
-    if (item.matches(".image-panel, .service-card--featured, .reason-score")) item.classList.add("reveal--image");
-    if (item.matches(".team-card")) item.classList.add("reveal--portrait");
-    if (item.matches(".problem-list article, .reason-list article, .faq-list details")) item.classList.add("reveal--slide");
     item.style.setProperty("--reveal-delay", `${Math.min(index % 6, 4) * 45}ms`);
     observer.observe(item);
   });
