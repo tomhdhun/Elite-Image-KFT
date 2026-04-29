@@ -19,15 +19,16 @@ const serviceItems = [
   ["szolgaltatas-tanacsadas.html", "Marketing audit"],
 ];
 
-const logoMarkup = '<img class="brand__logo" src="assets/elite-image-logo.svg" alt="Elite Image Kft.">';
+const logoMarkup = '<img class="brand__logo" src="assets/elite-image-logo.svg?v=20260429b" alt="Elite Image Marketing">';
 const currentPage = window.location.pathname.split("/").pop() || "index.html";
 
 const globalStyles = document.createElement("style");
 globalStyles.textContent = `
-  .brand { display: inline-flex; align-items: center; min-width: 0; }
-  .brand__logo { width: clamp(128px, 15vw, 190px); max-height: 56px; object-fit: contain; }
-  .site-footer .brand__logo { width: clamp(148px, 18vw, 230px); max-height: 68px; }
-  .nav { min-height: 78px; }
+  .brand { display: inline-flex; align-items: center; justify-content: flex-start; min-width: 0; line-height: 0; overflow: visible; }
+  .brand__logo { display: block; width: clamp(178px, 16vw, 246px); height: auto; max-width: 100%; max-height: none; object-fit: contain; object-position: left center; overflow: visible; }
+  .site-footer .brand__logo { width: clamp(196px, 20vw, 286px); height: auto; max-height: none; }
+  .nav { min-height: 86px; overflow: visible; }
+  .site-header { overflow: visible; }
   .nav__links { gap: 4px; }
   .nav__item { position: relative; }
   .nav__drop-trigger { min-height: 42px; display: inline-flex; align-items: center; gap: 7px; padding: 0 13px; color: #e8dec9; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; border: 0; border-bottom: 1px solid transparent; background: transparent; cursor: pointer; font-family: inherit; }
@@ -40,7 +41,6 @@ globalStyles.textContent = `
   .hero__content h1, .page-hero h1, .section__head h2 { text-shadow: 0 22px 54px rgba(0,0,0,.56); }
   .hero__content h1 { max-width: 980px; padding: .1em 0 .12em; background: linear-gradient(90deg, rgba(240,207,130,.18), transparent 70%); border-left: 3px solid rgba(240,207,130,.7); padding-left: clamp(16px, 3vw, 34px); }
   .section__head h2, .page-hero h1 { color: #fff8e8; }
-  .section__head > div, .problem-statement, .reason-score { position: relative; }
   .section__head > div::after { content: ""; display: block; width: min(180px, 46vw); height: 2px; margin-top: 18px; background: linear-gradient(90deg, var(--gold), transparent); }
   .service-card, .value-card, .project-card, .contact-panel, .faq-list details, .reason-list article, .problem-list article { background: linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.018)); }
   .site-footer { padding: clamp(54px, 7vw, 78px) 0 30px; border-top: 1px solid rgba(214,173,87,.2); background: radial-gradient(circle at 18% 0, rgba(214,173,87,.12), transparent 28rem), #050505; }
@@ -52,14 +52,16 @@ globalStyles.textContent = `
   .footer__column a, .footer__meta a { color: #efe5d0; }
   .footer__column a:hover, .footer__meta a:hover { color: var(--gold-bright); }
   .footer__meta { width: min(var(--max), calc(100% - 32px)); margin: 34px auto 0; padding-top: 20px; border-top: 1px solid rgba(214,173,87,.16); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; color: #9f947e; font-size: .82rem; }
+  .team-card img { object-position: center 16%; background: #fff; }
   .reveal { filter: blur(3px); transform: translateY(18px); }
   .reveal--slide { transform: translateY(18px); }
   .service-rail .reveal:nth-child(even), .team-grid .reveal:nth-child(even), .service-rail .reveal:nth-child(odd), .team-grid .reveal:nth-child(odd) { transform: translateY(20px); }
   .section, .cta { transition: opacity 140ms linear, transform 140ms linear; }
   @media (max-width: 1100px) { .nav { gap: 14px; } .nav__links a, .nav__drop-trigger { padding-inline: 9px; font-size: .76rem; } .team-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
   @media (max-width: 920px) {
-    .brand__logo { width: 142px; }
-    .nav__links { overflow-y: auto; max-height: calc(100vh - 76px); }
+    .brand__logo { width: 176px; }
+    .nav { min-height: 82px; }
+    .nav__links { overflow-y: auto; max-height: calc(100vh - 82px); }
     .nav__item { display: grid; }
     .nav__drop-trigger { justify-content: center; min-height: 54px; }
     .nav__drop { position: static; min-width: 0; opacity: 1; visibility: visible; transform: none; box-shadow: none; border: 0; border-radius: 0; padding: 0 0 10px; background: transparent; }
@@ -68,6 +70,7 @@ globalStyles.textContent = `
     .hero__content h1 { padding-left: 18px; }
   }
   @media (max-width: 620px) {
+    .brand__logo { width: 162px; }
     .footer__inner { grid-template-columns: 1fr; }
     .footer__meta { flex-direction: column; }
     .button { width: 100%; }
@@ -79,7 +82,7 @@ globalStyles.textContent = `
 document.head.appendChild(globalStyles);
 
 document.querySelectorAll(".brand").forEach((brand) => {
-  brand.setAttribute("aria-label", "Elite Image Kft. főoldal");
+  brand.setAttribute("aria-label", "Elite Image Marketing főoldal");
   brand.innerHTML = logoMarkup;
 });
 
@@ -99,33 +102,12 @@ if (footer) {
   footer.innerHTML = `
     <div class="footer__inner">
       <div class="footer__column">
-        <a class="brand" href="index.html" aria-label="Elite Image Kft. főoldal">${logoMarkup}</a>
+        <a class="brand" href="index.html" aria-label="Elite Image Marketing főoldal">${logoMarkup}</a>
         <p>Online marketing, PPC, tartalomgyártás és webfejlesztés egy kézben, átlátható stratégiával és üzleti fókuszú kivitelezéssel.</p>
       </div>
-      <div class="footer__column">
-        <h3>Navigáció</h3>
-        <div class="footer__links">
-          <a href="index.html">Főoldal</a>
-          <a href="szolgaltatasok.html">Szolgáltatások</a>
-          <a href="blog.html">Blog</a>
-          <a href="karrier.html">Karrier</a>
-          <a href="kapcsolat.html">Kapcsolat</a>
-        </div>
-      </div>
-      <div class="footer__column">
-        <h3>Kapcsolat</h3>
-        <p>Elite Image Kft.</p>
-        <p>4028 Debrecen, Kassai út 129.</p>
-        <a href="mailto:Info@eliteimage.hu">Info@eliteimage.hu</a>
-        <a href="tel:+36706789424">+36 70 678 9424</a>
-        <a href="tel:+36204968198">+36 20 496 8198</a>
-      </div>
-      <div class="footer__column">
-        <h3>Jogi információk</h3>
-        <a href="aszf.html">Általános szerződési feltételek</a>
-        <a href="adatkezeles.html">Adatkezelési tájékoztató</a>
-        <p>Ügyvezetők: Taussig Dávid és Seres Sándor</p>
-      </div>
+      <div class="footer__column"><h3>Navigáció</h3><div class="footer__links"><a href="index.html">Főoldal</a><a href="szolgaltatasok.html">Szolgáltatások</a><a href="blog.html">Blog</a><a href="karrier.html">Karrier</a><a href="kapcsolat.html">Kapcsolat</a></div></div>
+      <div class="footer__column"><h3>Kapcsolat</h3><p>Elite Image Kft.</p><p>4028 Debrecen, Kassai út 129.</p><a href="mailto:Info@eliteimage.hu">Info@eliteimage.hu</a><a href="tel:+36706789424">+36 70 678 9424</a><a href="tel:+36204968198">+36 20 496 8198</a></div>
+      <div class="footer__column"><h3>Jogi információk</h3><a href="aszf.html">Általános szerződési feltételek</a><a href="adatkezeles.html">Adatkezelési tájékoztató</a><p>Ügyvezetők: Taussig Dávid és Seres Sándor</p></div>
     </div>
     <div class="footer__meta"><span>© 2026 Elite Image Kft. Minden jog fenntartva.</span><span>Facebook / Instagram / TikTok</span></div>
   `;
@@ -145,22 +127,17 @@ document.addEventListener("click", (event) => {
   }
 });
 
-const revealTargets = document.querySelectorAll(
-  ".section__head, .service-card, .value-card, .problem-statement, .problem-list article, .feature-band > div, .reason-score, .reason-list article, .team-card, .faq-list details, .stat, .image-panel, .project-card, .contact-panel"
-);
+const revealTargets = document.querySelectorAll(".section__head, .service-card, .value-card, .problem-statement, .problem-list article, .feature-band > div, .reason-score, .reason-list article, .team-card, .faq-list details, .stat, .image-panel, .project-card, .contact-panel");
 
 if ("IntersectionObserver" in window) {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
-  );
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
 
   revealTargets.forEach((item, index) => {
     item.classList.add("reveal");
