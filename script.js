@@ -20,18 +20,19 @@ const serviceItems = [
 ];
 
 const teamItems = [
-  ["assets/team-01.svg?v=20260429c", "Taussig Dávid", "CEO / PPC reklámstratégia vezető"],
-  ["assets/team-02.svg?v=20260429c", "Seres Sándor", "CEO / tartalomstratégia vezető"],
-  ["assets/team-03.svg?v=20260429c", "Leposa Benedek", "Forgatásvezető / script író"],
-  ["assets/team-04.svg?v=20260429c", "Hevesi Emília", "Szövegíró / social media manager"],
-  ["assets/team-05.svg?v=20260429c", "Farkas Roland", "Videóvágó / operatőr"],
-  ["assets/team-06.svg?v=20260429c", "Kiss Bence", "Operatőr / fotós"],
-  ["assets/team-07.svg?v=20260429c", "Bíró Adrienn", "Grafikus / social media manager"],
-  ["assets/team-08.svg?v=20260429c", "Balogh Levente", "Videóvágó / operatőr"],
-  ["assets/team-09.svg?v=20260429c", "Tóbi Tamás", "Csapattag / kreatív támogatás"]
+  ["assets/team-01.svg?v=20260504", "Taussig Dávid", "CEO / PPC reklámstratégia vezető"],
+  ["assets/team-02.svg?v=20260504", "Seres Sándor", "CEO / tartalomstratégia vezető"],
+  ["assets/team-03.svg?v=20260504", "Leposa Benedek", "Forgatásvezető / script író"],
+  ["assets/team-04.svg?v=20260504", "Hevesi Emília", "Szövegíró / social media manager"],
+  ["assets/team-05.svg?v=20260504", "Farkas Roland", "Videóvágó / operatőr"],
+  ["assets/team-06.svg?v=20260504", "Kiss Bence", "Operatőr / fotós"],
+  ["assets/team-07.svg?v=20260504", "Bíró Adrienn", "Grafikus / social media manager"],
+  ["assets/team-08.svg?v=20260504", "Balogh Levente", "Videóvágó / operatőr"],
+  ["assets/team-09.svg?v=20260504", "Tóbi Tamás", "Csapattag / kreatív támogatás"],
+  ["assets/elite-image-logo.svg?v=20260504", "10. csapattag", "Fotó hamarosan érkezik"]
 ];
 
-const logoMarkup = '<img class="brand__logo" src="assets/elite-image-logo.svg?v=20260429c" alt="Elite Image Marketing">';
+const logoMarkup = '<img class="brand__logo" src="assets/elite-image-logo.svg?v=20260504" alt="Elite Image Marketing">';
 const currentPage = window.location.pathname.split("/").pop() || "index.html";
 
 const globalStyles = document.createElement("style");
@@ -40,7 +41,9 @@ globalStyles.textContent = `
   .brand__logo { display: block; width: clamp(178px, 16vw, 246px); height: auto; max-width: 100%; max-height: none; object-fit: contain; object-position: left center; overflow: visible; }
   .site-footer .brand__logo { width: clamp(196px, 20vw, 286px); height: auto; max-height: none; }
   .nav { min-height: 86px; overflow: visible; }
-  .site-header { overflow: visible; }
+  .site-header { overflow: visible; transition: transform .36s cubic-bezier(.22,.61,.36,1), background .24s ease, box-shadow .24s ease; will-change: transform; }
+  .site-header--hidden { transform: translateY(-112%); }
+  .site-header--scrolled { background: rgba(8,7,6,.92); box-shadow: 0 20px 50px rgba(0,0,0,.34); backdrop-filter: blur(18px); }
   .nav__links { gap: 4px; }
   .nav__item { position: relative; }
   .nav__drop-trigger { min-height: 42px; display: inline-flex; align-items: center; gap: 7px; padding: 0 13px; color: #e8dec9; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; border: 0; border-bottom: 1px solid transparent; background: transparent; cursor: pointer; font-family: inherit; }
@@ -54,7 +57,9 @@ globalStyles.textContent = `
   .section__head h2, .page-hero h1 { color: #fff8e8; }
   .section__head > div::after { content: ""; display: block; width: min(180px, 46vw); height: 2px; margin-top: 18px; background: linear-gradient(90deg, var(--gold), transparent); }
   .team-grid { align-items: stretch; }
-  .team-card img { object-position: center 16%; background: #fff; }
+  .team-card { min-height: 318px; }
+  .team-card img { object-position: center 14%; background: #fff; image-rendering: auto; transform: translateZ(0); }
+  .team-card:last-child img { object-fit: contain; padding: clamp(34px, 7vw, 64px); background: radial-gradient(circle at 50% 35%, rgba(240,207,130,.14), transparent 56%), #050505; }
   .site-footer { padding: clamp(54px, 7vw, 78px) 0 30px; border-top: 1px solid rgba(214,173,87,.2); background: radial-gradient(circle at 18% 0, rgba(214,173,87,.12), transparent 28rem), #050505; }
   .footer__inner { width: min(var(--max), calc(100% - 32px)); display: grid; grid-template-columns: minmax(230px, 1.15fr) repeat(3, minmax(170px, .8fr)); gap: clamp(24px, 4vw, 48px); align-items: start; }
   .footer__column { display: grid; gap: 10px; }
@@ -65,10 +70,19 @@ globalStyles.textContent = `
   .footer__column a:hover, .footer__meta a:hover { color: var(--gold-bright); }
   .footer__meta { width: min(var(--max), calc(100% - 32px)); margin: 34px auto 0; padding-top: 20px; border-top: 1px solid rgba(214,173,87,.16); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; color: #9f947e; font-size: .82rem; }
   .reveal { filter: blur(3px); transform: translateY(18px); }
-  .section, .cta { transition: opacity 140ms linear, transform 140ms linear; }
+  .section, .cta { opacity: var(--section-opacity, 1); transform: translateY(var(--section-drift, 0)); transition: opacity 140ms linear, transform 140ms linear; }
+  .site-loader { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; padding: 24px; background: rgba(4,4,4,.52); backdrop-filter: blur(22px); transition: opacity .34s ease, visibility .34s ease; }
+  .site-loader.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
+  .site-loader__panel { width: min(360px, calc(100vw - 48px)); display: grid; justify-items: center; gap: 22px; padding: 30px 28px; border: 1px solid rgba(240,207,130,.24); border-radius: 14px; background: rgba(255,255,255,.07); box-shadow: 0 30px 90px rgba(0,0,0,.45); }
+  .site-loader__panel img { width: min(236px, 72vw); height: auto; }
+  .site-loader__bar { width: 100%; height: 4px; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,.16); }
+  .site-loader__bar span { display: block; height: 100%; width: 100%; border-radius: inherit; background: linear-gradient(90deg, #8d6421, #f0cf82, #fff2bc); transform-origin: left center; animation: elite-loader-bar 2s cubic-bezier(.19,1,.22,1) forwards; }
+  .is-loading { overflow: hidden; }
+  @keyframes elite-loader-bar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
   @media (max-width: 1100px) { .nav { gap: 14px; } .nav__links a, .nav__drop-trigger { padding-inline: 9px; font-size: .76rem; } .team-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
   @media (max-width: 920px) { .brand__logo { width: 176px; } .nav { min-height: 82px; } .nav__links { overflow-y: auto; max-height: calc(100vh - 82px); } .nav__item { display: grid; } .nav__drop-trigger { justify-content: center; min-height: 54px; } .nav__drop { position: static; min-width: 0; opacity: 1; visibility: visible; transform: none; box-shadow: none; border: 0; border-radius: 0; padding: 0 0 10px; background: transparent; } .nav__drop a { justify-content: center; min-height: 44px; } .footer__inner { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 620px) { .brand__logo { width: 162px; } .footer__inner { grid-template-columns: 1fr; } .footer__meta { flex-direction: column; } .button { width: 100%; } .team-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 620px) { .brand__logo { width: 162px; } .footer__inner { grid-template-columns: 1fr; } .footer__meta { flex-direction: column; } .button { width: 100%; } .team-grid { grid-template-columns: 1fr; } .team-card { min-height: 300px; } }
+  @media (prefers-reduced-motion: reduce) { .site-header, .site-loader, .site-loader__bar span, .section, .cta { transition: none; animation: none; } }
 `;
 document.head.appendChild(globalStyles);
 
@@ -80,10 +94,11 @@ document.querySelectorAll(".brand").forEach((brand) => {
 const nav = document.querySelector(".nav__links");
 if (nav) {
   nav.innerHTML = navItems.map(([href, label]) => {
+    const isBlogChild = currentPage === "blog-bejegyzes.html" && href === "blog.html";
     if (href === "szolgaltatasok.html") {
       return `<div class="nav__item"><button class="nav__drop-trigger" type="button">${label}</button><div class="nav__drop"><a href="szolgaltatasok.html">Áttekintés</a>${serviceItems.map(([serviceHref, serviceLabel]) => `<a href="${serviceHref}">${serviceLabel}</a>`).join("")}</div></div>`;
     }
-    const current = href === currentPage ? ' aria-current="page"' : "";
+    const current = href === currentPage || isBlogChild ? ' aria-current="page"' : "";
     return `<a href="${href}"${current}>${label}</a>`;
   }).join("");
 }
@@ -106,6 +121,23 @@ if (footer) {
   `;
 }
 
+const showFirstVisitLoader = () => {
+  if (sessionStorage.getItem("eliteLoaderSeen") || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  sessionStorage.setItem("eliteLoaderSeen", "true");
+  document.body.classList.add("is-loading");
+  const loader = document.createElement("div");
+  loader.className = "site-loader";
+  loader.innerHTML = `<div class="site-loader__panel" role="status" aria-label="Oldal betöltése">${logoMarkup}<div class="site-loader__bar"><span></span></div></div>`;
+  document.body.appendChild(loader);
+  window.setTimeout(() => {
+    loader.classList.add("is-done");
+    document.body.classList.remove("is-loading");
+    window.setTimeout(() => loader.remove(), 420);
+  }, 2000);
+};
+
+showFirstVisitLoader();
+
 if (toggle) {
   toggle.addEventListener("click", () => {
     const isOpen = document.body.classList.toggle("menu-open");
@@ -120,7 +152,19 @@ document.addEventListener("click", (event) => {
   }
 });
 
-const revealTargets = document.querySelectorAll(".section__head, .service-card, .value-card, .problem-statement, .problem-list article, .feature-band > div, .reason-score, .reason-list article, .team-card, .faq-list details, .stat, .image-panel, .project-card, .contact-panel");
+const header = document.querySelector(".site-header");
+let lastScrollY = window.scrollY;
+const updateHeaderState = () => {
+  if (!header || document.body.classList.contains("menu-open")) return;
+  const currentY = window.scrollY;
+  header.classList.toggle("site-header--scrolled", currentY > 14);
+  header.classList.toggle("site-header--hidden", currentY > 130 && currentY > lastScrollY + 4);
+  lastScrollY = Math.max(currentY, 0);
+};
+window.addEventListener("scroll", updateHeaderState, { passive: true });
+updateHeaderState();
+
+const revealTargets = document.querySelectorAll(".section__head, .service-card, .value-card, .problem-statement, .problem-list article, .feature-band > div, .reason-score, .reason-list article, .team-card, .faq-list details, .stat, .image-panel, .project-card, .contact-panel, .article-body p, .article-aside__box, .career-form .field");
 
 if ("IntersectionObserver" in window) {
   const observer = new IntersectionObserver((entries) => {
@@ -148,8 +192,8 @@ const updateSectionFade = () => {
     const leavingTop = Math.max(0, Math.min(1, -rect.top / Math.max(rect.height * 0.8, 1)));
     const leavingBottom = Math.max(0, Math.min(1, (rect.bottom - viewport) / Math.max(rect.height * 0.9, 1)));
     const fade = Math.max(leavingTop, leavingBottom);
-    section.style.setProperty("--section-opacity", (1 - fade * 0.16).toFixed(3));
-    section.style.setProperty("--section-drift", `${(leavingTop * -6 + leavingBottom * 5).toFixed(2)}px`);
+    section.style.setProperty("--section-opacity", (1 - fade * 0.18).toFixed(3));
+    section.style.setProperty("--section-drift", `${(leavingTop * -8 + leavingBottom * 6).toFixed(2)}px`);
   });
 };
 
@@ -159,6 +203,7 @@ if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     if (ticking) return;
     ticking = true;
     window.requestAnimationFrame(() => {
+      updateHeaderState();
       updateSectionFade();
       ticking = false;
     });
