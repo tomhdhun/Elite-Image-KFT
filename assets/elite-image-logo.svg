@@ -1,24 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 128" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 116" role="img" aria-labelledby="title desc">
   <title id="title">Elite Image Marketing</title>
-  <desc id="desc">Elite Image Marketing arany-feher logo fekete hatterhez.</desc>
+  <desc id="desc">Elite Image Marketing arany-fehér logó fekete háttérhez.</desc>
   <defs>
     <linearGradient id="gold" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0" stop-color="#fff3a7"/>
-      <stop offset="0.32" stop-color="#e4bd61"/>
-      <stop offset="0.62" stop-color="#a97727"/>
-      <stop offset="1" stop-color="#f7da8f"/>
+      <stop offset="0" stop-color="#fff0a6"/>
+      <stop offset="0.42" stop-color="#d7a94e"/>
+      <stop offset="1" stop-color="#8c5e1f"/>
     </linearGradient>
-    <filter id="soft" x="-8%" y="-12%" width="116%" height="124%">
-      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.55"/>
-      <feDropShadow dx="0" dy="0" stdDeviation="1.2" flood-color="#f0cf82" flood-opacity="0.32"/>
+    <filter id="shadow" x="-10%" y="-15%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.4" flood-color="#000" flood-opacity=".55"/>
     </filter>
   </defs>
-  <rect width="430" height="128" fill="transparent"/>
-  <g filter="url(#soft)">
-    <path d="M40 25 L60 8 H405 V16 H63 L48 31 V101 H405 V109 H40 Z" fill="url(#gold)"/>
-    <path d="M66 24 H405 V32 H66 Z" fill="url(#gold)"/>
-    <path d="M65 96 H405 V104 H65 Z" fill="url(#gold)"/>
-    <text x="58" y="65" fill="url(#gold)" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="700" letter-spacing="1.5">ELITE</text>
-    <text x="58" y="91" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800" letter-spacing="4.8">IMAGE MARKETING</text>
+  <rect width="360" height="116" fill="transparent"/>
+  <g filter="url(#shadow)">
+    <path d="M28 24 L49 10 H330" fill="none" stroke="url(#gold)" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+    <path d="M28 24 V96 H330" fill="none" stroke="url(#gold)" stroke-width="7" stroke-linecap="square"/>
+    <text x="51" y="59" fill="url(#gold)" font-family="Georgia, 'Times New Roman', serif" font-size="39" font-weight="700" letter-spacing="1">ELITE</text>
+    <text x="52" y="84" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800" letter-spacing="4">IMAGE MARKETING</text>
   </g>
 </svg>
