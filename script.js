@@ -18,9 +18,9 @@ const serviceItems = [
   ["szolgaltatas-tanacsadas.html", "Tanácsadás"]
 ];
 
-const teamVersion = "20260509";
+const teamVersion = "20260510";
 const teamItems = [
-  [`assets/team-01.webp?v=${teamVersion}`, "Taussig Dávid", "CEO / PPC reklámstratégia vezető"],
+  [`assets/team-01.svg?v=${teamVersion}`, "Taussig Dávid", "CEO / PPC reklámstratégia vezető"],
   [`assets/team-02.svg?v=${teamVersion}`, "Seres Sándor", "CEO / tartalomstratégia vezető"],
   [`assets/team-03.svg?v=${teamVersion}`, "Leposa Benedek", "Forgatásvezető / scriptíró"],
   [`assets/team-04.svg?v=${teamVersion}`, "Hevesi Emília", "Szövegíró / social media manager"],
@@ -62,7 +62,8 @@ globalStyles.textContent = `
   .section__head > div::after { content:""; display:block; width:min(180px,46vw); height:2px; margin-top:18px; background:linear-gradient(90deg,var(--gold),transparent); }
   .team-grid { grid-template-columns:repeat(5,minmax(0,1fr)) !important; align-items:stretch; }
   .team-card { min-height:330px; }
-  .team-card img { object-position:center 14%; background:#fff; image-rendering:auto; transform:translateZ(0); }
+  .team-card img { object-position:center 14%; background:#fff; image-rendering:auto; transform:translateZ(0); filter:none !important; }
+  .team-card.reveal,.team-card.reveal.is-visible { filter:none !important; }
   .site-footer { padding:clamp(54px,7vw,78px) 0 30px; border-top:1px solid rgba(214,173,87,.2); background:radial-gradient(circle at 18% 0,rgba(214,173,87,.12),transparent 28rem),#050505; }
   .footer__inner { width:min(var(--max),calc(100% - 32px)); display:grid; grid-template-columns:minmax(230px,1.15fr) repeat(3,minmax(170px,.8fr)); gap:clamp(24px,4vw,48px); align-items:start; }
   .footer__column { display:grid; gap:10px; }
