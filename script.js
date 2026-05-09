@@ -12,25 +12,26 @@ const navItems = [
 ];
 
 const serviceItems = [
-  ["szolgaltatas-hirdetes-kezeles.html", "Hirdetés kezelés"],
-  ["szolgaltatas-tartalom-marketing.html", "Tartalom marketing"],
-  ["szolgaltatas-weboldal-keszites.html", "Weboldal készítés"],
+  ["szolgaltatas-hirdetes-kezeles.html", "Hirdetéskezelés"],
+  ["szolgaltatas-tartalom-marketing.html", "Tartalommarketing"],
+  ["szolgaltatas-weboldal-keszites.html", "Weboldal-készítés"],
   ["szolgaltatas-tanacsadas.html", "Tanácsadás"]
 ];
 
+const teamVersion = "20260509";
 const teamItems = [
-  ["assets/team-01.webp?v=20260505", "Taussig Dávid", "CEO / PPC reklámstratégia vezető"],
-  ["assets/team-02.svg?v=20260505", "Seres Sándor", "CEO / tartalomstratégia vezető"],
-  ["assets/team-03.svg?v=20260505", "Leposa Benedek", "Forgatásvezető / scriptíró"],
-  ["assets/team-04.svg?v=20260505", "Hevesi Emília", "Szövegíró / social media manager"],
-  ["assets/team-05.svg?v=20260505", "Farkas Roland", "Videóvágó / operatőr"],
-  ["assets/team-06.svg?v=20260505", "Kiss Bence", "Operatőr / fotós"],
-  ["assets/team-07.svg?v=20260505", "Bíró Adrienn", "Grafikus / social media manager"],
-  ["assets/team-08.svg?v=20260505", "Balogh Levente", "Videóvágó / operatőr"],
-  ["assets/team-09.svg?v=20260505", "Tóbi Tamás", "Webfejlesztő / technikai támogatás"]
+  [`assets/team-01.webp?v=${teamVersion}`, "Taussig Dávid", "CEO / PPC reklámstratégia vezető"],
+  [`assets/team-02.svg?v=${teamVersion}`, "Seres Sándor", "CEO / tartalomstratégia vezető"],
+  [`assets/team-03.svg?v=${teamVersion}`, "Leposa Benedek", "Forgatásvezető / scriptíró"],
+  [`assets/team-04.svg?v=${teamVersion}`, "Hevesi Emília", "Szövegíró / social media manager"],
+  [`assets/team-05.svg?v=${teamVersion}`, "Farkas Roland", "Videóvágó / operatőr"],
+  [`assets/team-06.svg?v=${teamVersion}`, "Kiss Bence", "Operatőr / fotós"],
+  [`assets/team-07.svg?v=${teamVersion}`, "Bíró Adrienn", "Grafikus / social media manager"],
+  [`assets/team-08.svg?v=${teamVersion}`, "Balogh Levente", "Videóvágó / operatőr"],
+  [`assets/team-09.svg?v=${teamVersion}`, "Tóbi Tamás", "Webfejlesztő / technikai támogatás"]
 ];
 
-const logoMarkup = '<img class="brand__logo" src="assets/elite-image-logo.svg?v=20260505" alt="Elite Image Marketing">';
+const logoMarkup = '<img class="brand__logo" src="assets/elite-image-logo.svg?v=20260509" alt="Elite Image Marketing">';
 
 const globalStyles = document.createElement("style");
 globalStyles.textContent = `
@@ -108,7 +109,7 @@ if (nav) {
 
 const teamGrid = document.querySelector(".team-grid");
 if (teamGrid) {
-  teamGrid.innerHTML = teamItems.map(([src, name, role]) => `<article class="team-card"><img src="${src}" alt="${name}"><div><span>${role}</span><h3>${name}</h3></div></article>`).join("");
+  teamGrid.innerHTML = teamItems.map(([src, name, role]) => `<article class="team-card"><img src="${src}" alt="${name}" loading="lazy" decoding="async"><div><span>${role}</span><h3>${name}</h3></div></article>`).join("");
 }
 
 const footer = document.querySelector(".site-footer");
